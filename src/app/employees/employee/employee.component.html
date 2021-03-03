@@ -1,0 +1,92 @@
+<mat-toolbar>
+  <span>{{service.form.controls['$key'].value?"Izmijenite nalog":"Novi nalog"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="1" rowHeight="1000px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="$key"  matInput placeholder="Radni nalog br:"></mat-form-field>
+        <mat-form-field>
+          <input formControlName="fullName" matInput placeholder="Naručitelj: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="client" placeholder="Naručitelj po ugovoru: *">
+            <mat-option>None</mat-option>
+            <ng-container *ngFor="let client of clientService.array">
+              <mat-option value="{{client.$key}}">{{client.name}}-{{client.$key}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="maintainer" placeholder="Serviser: ">
+            <mat-option>None</mat-option>
+            <ng-container *ngFor="let maintainer of maintainerService.array">
+              <mat-option value="{{maintainer.$key}}">{{maintainer.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+          <mat-radio-group formControlName="department" class="mat-subheading-2">Odjel:
+            <mat-radio-button value="Servis">Servis</mat-radio-button>
+            <mat-radio-button value="Sistem">Sistem</mat-radio-button>
+            <mat-radio-button value="Mreža">Mreža</mat-radio-button>
+            <mat-radio-button value="Programeri">Programeri</mat-radio-button>
+            <mat-radio-button value="Isporuka">Isporuka</mat-radio-button>
+            <mat-radio-button value="POS/ITB">POS/ITB</mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field>
+          <input formControlName="startDate" matInput [matDatepicker]="picker" placeholder="Datum intervencije/instalacije: *">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="service.form.controls['startDate'].errors?.required"> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+        <input formControlName="startTime" matInput [ngxTimepicker]="picker1" placeholder="Vrijeme početka servisiranja: *" style="">
+          <ngx-material-timepicker #picker1></ngx-material-timepicker>
+          <mat-error *ngIf="service.form.controls['startTime'].errors?.required"> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+        <input formControlName="finishTime" matInput [ngxTimepicker]="picker2" placeholder="Vrijeme završetka servisiranja: *">
+          <ngx-material-timepicker #picker2></ngx-material-timepicker>
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput formControlName="description" placeholder="Opis zahtjeva: *"></textarea>
+          <mat-error *ngIf="service.form.controls['description'].errors?.required"> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput formControlName="remark" placeholder="Napomena:"></textarea>
+        </mat-form-field>
+        <div class="add-bottom-padding">
+          <mat-radio-group formControlName="serviceType" class="mat-subheading-2">Intervencija izvršena:
+            <mat-radio-button value="1">Po prijavi</mat-radio-button>
+            <mat-radio-button value="2">Preventivno</mat-radio-button>
+            <mat-radio-button value="3">Po ugovoru</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="add-bottom-padding">
+          <mat-checkbox formControlName="isPermanent">Ugovorni naručitelj</mat-checkbox>
+          <mat-error *ngIf="service.form.controls['isPermanent'].errors?.required"> Ovo polje je obavezno!</mat-error>
+        </div>
+        <div class="add-bottom-padding">
+          <mat-checkbox formControlName="isReplaceable">Ostavljen zamjenski uređaj</mat-checkbox>
+          <div class="add-bottom-padding">
+        </div>
+        <div class="mat-subheading-2">Prioritet ({{myModel}}):
+          <mat-slider [(ngModel)]="myModel" (input)="myModel = $event.value" min="1" max="10" step="1"></mat-slider>
+        </div>
+
+
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Potvrdi</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Ukloni</button>
+        </div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
