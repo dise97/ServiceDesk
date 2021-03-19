@@ -1,0 +1,50 @@
+<mat-toolbar>
+  <span>{{service.form.controls['$key'].value?"Izmijenite klijenta":"Klijent"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="1" rowHeight="600px">
+    <mat-grid-tile>
+      <div class="controles-container">
+      <mat-form-field>
+          <input [readonly]="true" formControlName="sifra" matInput placeholder="Šifra klijenta: *" [ngModel]="x">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="name" matInput placeholder="Naziv: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+      <mat-form-field>
+          <input formControlName="clientID" matInput placeholder="ID broj: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="address" matInput placeholder="Adresa: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+        <input formControlName="city" matInput placeholder="Mjesto: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="phone" matInput placeholder="Telefon: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="email" matInput placeholder="Email: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="contPers" matInput placeholder="Kontakt osoba: *">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Potvrdi</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Ukloni</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+

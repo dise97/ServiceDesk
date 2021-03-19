@@ -9,7 +9,15 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { EmployeeComponent } from '../employee/employee.component';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { DialogService } from 'src/app/shared/dialog.service';
+import {GetclientsService} from '../../shared/getclients.service';
+import { GetmaintainersService } from 'src/app/shared/getmaintainers.service';
+import {AuthService} from '../../shared/auth.service';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
 
+export class Item{
+    body: string;
+}
 
 @Component({
   selector: 'app-employee-list',
@@ -20,8 +28,12 @@ export class EmployeeListComponent implements OnInit {
 
   constructor(public service: EmployeeService,
     public clientService: ClientService,
-    public maintainerService: MaintainerService,
+    public getclientsService: GetclientsService,
+    public getmaintainersService: GetmaintainersService,
     public dialog: MatDialog,
+    public authservice: AuthService,
+    public afu: AngularFireAuth,
+    public router: Router,
     public notificationService: NotificationService,
     public dialogService: DialogService) { }
 
@@ -36,13 +48,14 @@ export class EmployeeListComponent implements OnInit {
   this.service.getEmployees().subscribe(
     list=>{
       let array = list.map(item=>{
-        let clientName=this.clientService.getClientName(item.payload.val()['client']);
-        let maintainerName=this.maintainerService.getMaintainerName(item.payload.val()['maintainer']);
+        let maintainerName=this.getmaintainersService.getMaintainerName(item.payload.val()['maintainer']);
+        let clientName=this.getclientsService.getClientName(item.payload.val()['client']);
         return{
           $key: item.key,
-          clientName,
           maintainerName,
+          clientName,
           ...item.payload.val()
+
         };
       });
       this.listData= new MatTableDataSource(array);
@@ -53,7 +66,8 @@ export class EmployeeListComponent implements OnInit {
           return ele != 'actions' && data[ele].toLowerCase().indexOf(filter) != -1;
         });
       }
-    });
+    }
+    );
   }
   onSearchClear(){
     this.searchKey="";
@@ -70,6 +84,7 @@ export class EmployeeListComponent implements OnInit {
     dialogConfig.width="60%";
     dialogConfig.height="700px";
     this.dialog.open(EmployeeComponent, dialogConfig);
+
   }
   onEdit(row){
     this.service.populateForm(row);

@@ -16,6 +16,19 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+                "lodash",
+                "firebase",
+                "@angular/common/locales/fr",
+                "lodash/dropRight",
+                "@firebase/app",
+                "firebase/app",
+                "@firebase/database",
+                "@firebase/firestore",
+                "@firebase/functions",
+                "@firebase/performance",
+                "@firebase/remote-config"
+            ],
             "outputPath": "dist/AngularProject",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -27,9 +40,13 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+                "./node_modules/jquery/dist/jquery.min.js",
+                "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -122,6 +139,8 @@
         }
       }
     }
+    
   },
   "defaultProject": "AngularProject"
+  
 }

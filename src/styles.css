@@ -30,7 +30,20 @@ mat-radio-group mat-radio-button{
 .button-row button{
   margin:5px;
 }
-
+.button-print button{
+  margin-right: 15px;
+}
+.dnev{
+  width: 15%;
+}
+ .dnevnica {
+  max-width: 80px !important;
+}
+.align-right {
+  text-align: right;
+  margin: 0px 7px;
+  display: inline;
+}
 snack-bar-container.success{
   background-color: #5cb85b;
   color: #fff;
@@ -152,3 +165,81 @@ body{
   margin-right: 10px;
   font-size: 17px;
 }
+.sifrarnik{
+  margin-right: 10px;
+  font-size: 17px;
+}
+.wage-card{
+  max-width: 200px;
+  max-height: 200px;
+}
+@media print {
+  #print-section {
+    overflow: auto !important;
+    position: relative;
+  }
+  html, body {
+    border: 1px solid white;
+    height: 99%;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+ }
+ .print-display-none,
+ .print-display-none * {
+   display: none !important;
+ }
+ .print-visibility-hide,
+ .print-visibility-hide * {
+   visibility: hidden !important;
+ }
+ .printme,
+ .printme * {
+   visibility: visible !important;
+ }
+ .printme {
+   position: absolute;
+   left: 0;
+   top: 0;
+ }
+}
+
+
+.example-card {
+    max-width: 352px;
+    background-color:#3f51b5;
+  }
+  .center-content{
+    text-align: -webkit-center;
+    margin-top: 5cm;
+  }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .example-full-width {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .mat-card-title{
+    margin-left: 3cm;
+    color:white;
+  }
+  .mat-card-subtitle{
+    margin-left: 3cm;
+    color: white;
+  }
+  .mat-button{
+    margin-top: 10px;
+    width: 100%;
+    color: #3f51b5;
+    background-color:white;
+    height: 40px;
+  }
+  .login-class{
+      justify-content: center;
+      padding: 5cm;
+      margin-left: 10cm;
+  }
+

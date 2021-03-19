@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <span>{{service.form.controls['$key'].value?"Izmijenite nalog":"Dnevnice"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="1" rowHeight="200px">
+    <mat-grid-tile>
+      <div class="controles-container">
+      <mat-form-field>
+          <input [readonly]="true" formControlName="sifra" matInput placeholder="Šifra dnevnica: *" [ngModel]="x">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="price1" matInput placeholder="Cijena dnevnice: ">
+          <mat-error> Ovo polje je obavezno!</mat-error>
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Potvrdi</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Ukloni</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="login-class">
+    <div class="col-md-10">
+    <form (ngSubmit)="login()">
+    <h3>ServiceDesk prijava</h3>
+      <div class="form-group">
+        <input type="email" name="email" class="form-control" [(ngModel)]="email" placeholder="Unesite email" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control" [(ngModel)]="password" placeholder="Unesite lozinku" required>
+      </div>
+      <div class="form-group">
+      <button mat-raised-button color="primary" type="submit">Prijava</button>
+      <div class="register"><a href="#" routerLink="/register">Registracija novog korisnika</a></div>
+      </div>
+      </form>
+      <div class="form-group">
+        <p *ngIf="errorMessage.length > 0" class="text-danger">{{errorMessage}}</p>
+        <p *ngIf="error.message.length > 0" class="text-danger">{{error.message}}</p>
+      </div>
+    </div>
+  </div>
+</div>

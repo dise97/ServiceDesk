@@ -1,6 +1,7 @@
+
 <div class="search-div">
   <button mat-raised-button (click)="onCreate()">
-    <mat-icon>add</mat-icon>Kreiraj
+    <mat-icon>add</mat-icon>Kreiraj CASE
   </button>
   <mat-form-field class="search-form-field" floatLabel="never">
     <input matInput [(ngModel)]="searchKey" placeholder="Traži" autocomplete="off" (keyup)="applyFilter()">
@@ -20,7 +21,7 @@
     <mat-cell *matCellDef="let element">{{element.finishTime}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="clientName">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Naručitelj</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Klijent</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.clientName}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="maintainerName">
@@ -62,3 +63,4 @@
   </mat-table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>
+<router-outlet></router-outlet>

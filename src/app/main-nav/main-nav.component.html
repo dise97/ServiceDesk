@@ -1,28 +1,44 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar><span class="material-icons">menu</span></mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="['employee-list']"><span class="material-icons">build</span>Cases</a>
-      <a mat-list-item [routerLink]="['contact']"><span class="material-icons">contact_page</span>Contacts</a>
-      <a mat-list-item [routerLink]="['default']"><span class="material-icons">dashboard</span>Dashboards</a>
-      <a mat-list-item href="#"><span class="material-icons">account_circle</span>Accounts</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>ServiceDesk</span>
-    </mat-toolbar>
-    <ng-content></ng-content>
-  </mat-sidenav-content>
+    <mat-sidenav
+        #drawer
+        class="sidenav"
+        fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false"
+    >
+        <mat-toolbar><span class="material-icons">menu</span></mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/employee-list"><span class="material-icons">build</span>Cases</a>
+            <a mat-list-item routerLink="/contact"><span class="material-icons">contact_page</span>Contacts</a>
+            <a mat-list-item routerLink="/default"><span class="material-icons">dashboard</span>Dashboards</a>
+            <a mat-list-item [matMenuTriggerFor]="sif" class="sifrarnik"
+                ><span class="material-icons">book</span>Šifrarnik</a>
+            <mat-menu #sif="matMenu">
+                <button mat-menu-item class="sifrarnik" routerLink="/clients-list">Klijenti</button>
+                <button mat-menu-item class="sifrarnik" routerLink="/wages-list">Dnevnice</button>
+                <button mat-menu-item class="sifrarnik" routerLink="/contracts-list">Ugovori</button>
+                <button mat-menu-item class="sifrarnik" routerLink="/departments-list">Odjeli</button>
+                <button mat-menu-item class="sifrarnik" routerLink="/maintainers-list">Serviseri</button>
+                <button mat-menu-item class="sifrarnik" routerLink="/fuel-list">Cijena goriva</button>
+            </mat-menu>
+            <a mat-list-item (click)="auth.signout()"><span class="material-icons">logout</span>Logout</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button
+                type="button"
+                aria-label="Toggle sidenav"
+                mat-icon-button
+                (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>ServiceDesk</span>
+
+        </mat-toolbar>
+        <ng-content></ng-content>
+    </mat-sidenav-content>
 </mat-sidenav-container>

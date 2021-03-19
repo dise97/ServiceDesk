@@ -26,13 +26,18 @@
     "amazing-time-picker": "^1.8.0",
     "angular-progress-bar": "^1.0.11",
     "angularfire2": "^5.4.2",
+    "bootstrap": "^4.6.0",
+    "crypto-js": "^3.1.9-1",
     "firebase": "^7.24.0",
     "hammerjs": "^2.0.8",
     "highcharts": "^9.0.1",
+    "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "ngx": "^2.4.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-material-timepicker": "^5.5.3",
+    "ngx-print": "^1.2.0-beta.5",
+    "randomstring": "^1.1.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
@@ -55,5 +60,11 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.1.2"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "singleQuote": true,
+    "printWidth": 120
   }
 }

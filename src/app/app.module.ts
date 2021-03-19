@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import {MatIconModule} from '@angular/material/icon';
 import { EmployeesComponent } from './employees/employees.component';
@@ -32,7 +31,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
@@ -41,8 +40,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {EmployeeService} from './shared/employee.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {ClientService} from './shared/client.service';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
@@ -56,23 +54,52 @@ import { AppRoutingModule } from 'src/app-routing.module';
 import { ContactComponent } from './contact/contact.component';
 import {ProgressBarModule} from "angular-progress-bar";
 import { DatePipe } from '@angular/common';
-import { DefaultModule } from './layouts/default/default.module';
-
-
-
+import { ContractsComponent } from './contracts/contracts.component';
+import { WagesComponent } from './wages/wages.component';
+import { NgxPrintModule } from 'ngx-print';
+import { ContractsListComponent } from './contracts-list/contracts-list.component';
+import { ClientsListComponent } from './clients-list/clients-list.component';
+import { ClientsComponent } from './clients/clients.component';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { WagesListComponent } from './wages-list/wages-list.component';
+import { MaintainersComponent } from './maintainers/maintainers.component';
+import { MaintainersListComponent } from './maintainers-list/maintainers-list.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { DepartmentsListComponent } from './departments-list/departments-list.component';
+import { KeyIdPipe } from './key-id.pipe';
+import { FuelComponent } from './fuel/fuel.component';
+import { FuelListComponent } from './fuel-list/fuel-list.component';
+import {LoginComponent} from '../../src/app/pages/login/login.component';
+import {RegisterComponent} from '../../src/app/pages/register/register.component';
+import { AuthService } from './shared/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
     EmployeeComponent,
+    LoginComponent,
+    RegisterComponent,
     EmployeeListComponent,
     MatConfirmDialogComponent,
     MainNavComponent,
     ContactComponent,
+    ContractsComponent,
+    WagesComponent,
+    ContractsListComponent,
+    ClientsListComponent,
+    ClientsComponent,
+    WagesListComponent,
+    MaintainersComponent,
+    MaintainersListComponent,
+    DepartmentsComponent,
+    DepartmentsListComponent,
+    KeyIdPipe,
+    FuelComponent,
+    FuelListComponent,
 
-
-  ],
+],
   imports: [
     BrowserModule,
     MatIconModule,
@@ -123,12 +150,12 @@ import { DefaultModule } from './layouts/default/default.module';
         HttpClientModule,
         AppRoutingModule,
         ProgressBarModule,
-        DefaultModule
+        NgxPrintModule,
+        AngularFireAuthModule
   ],
   exports: [MatFormFieldModule, MatInputModule, RouterModule],
-
-  providers: [EmployeeService, ClientService, MaintainerService, DatePipe],
+  providers: [EmployeeService, AuthService, ClientService, MaintainerService, DatePipe, { provide: MatDialogRef, useValue: {} }],
   bootstrap: [AppComponent],
-  entryComponents: [EmployeeComponent, MatConfirmDialogComponent]
+  entryComponents: [EmployeeComponent, MatConfirmDialogComponent, EmployeeListComponent]
 })
 export class AppModule { }
